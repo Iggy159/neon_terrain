@@ -8,17 +8,19 @@ float getElevation(vec2 _position) {
 
     float elevation = 0.0;
 
+    //float tunnel = Math.sin((position * 0.6) * 0.8);
+
     vec2 position = _position;
-    position.x -= uTime * 0.1;
+    position.x -= uTime * 0.9;
     //position.y += uTime * 0.1;
 
-    elevation = cnoise3(vec3(
-        (position * 10.) * 0.4,
+    elevation += cnoise3(vec3(
+        (position * 1.3) * 0.2,
         0.0
-    )) * .08;
+    )) * 1.8;
 
-    elevation = cnoise3(vec3(
-        (position * 40.) * 0.2,
+    elevation += cnoise3(vec3(
+        (position * 15.0) * 0.3,
         0.0
     )) * 0.09;
 
