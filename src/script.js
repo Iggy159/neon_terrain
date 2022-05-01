@@ -45,7 +45,6 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
-// Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 6
 camera.position.y = 1
@@ -56,9 +55,7 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
-/**
- * Cube
- */
+//Terrain
 const land = {}
 
 land.geometry = new THREE.PlaneBufferGeometry(20, 20, 200, 200)
@@ -78,8 +75,6 @@ land.mesh = new THREE.Mesh(land.geometry, land.material)
 scene.add(land.mesh)
 
 
-
-
 /**
  * Renderer
  */
@@ -88,12 +83,11 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true,
 })
 renderer.setSize(sizes.width, sizes.height)
-//renderer.setClearColor(0x111111, 1)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 const renderScene = new RenderPass(scene, camera);
 
-
+//Bloom
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
   1.5,
@@ -102,27 +96,22 @@ const bloomPass = new UnrealBloomPass(
 );
 bloomPass.exposure = 1.0
 bloomPass.threshold = 0.2;
-bloomPass.strength = 0.73; //intensity of glow
-bloomPass.radius = 1.9;
+bloomPass.strength = 0.78; //intensity of glow
+bloomPass.radius = 2.0;
 
 const composer = new EffectComposer(renderer);
 composer.setSize(window.innerWidth, window.innerHeight); 
 composer.renderToScreen = true; 
 composer.addPass(renderScene); 
 
-//composer.addPass(bloomPass);
-
+//Glitch
 const glitchPass = new GlitchPass();
-
-glitchPass.strength = 0.01
-//glitchPass.strength.y = 0.115
-glitchPass.ratio = 0.01
-glitchPass.columns = 0.03
 
 composer.addPass( new RenderPass( scene, camera ) );
 
 composer.addPass(glitchPass);
 composer.addPass(bloomPass) 
+
 /**
  * Animate
  */
@@ -137,7 +126,6 @@ const tick = () =>
 
     land.material.uniforms.uTime.value = elapsedTime
     
-
     // Update controls
     controls.update()
 
