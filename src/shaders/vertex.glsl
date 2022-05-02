@@ -9,7 +9,7 @@ float getElevation(vec2 _position) {
     float elevation = 0.0;
 
     vec2 position = _position;
-    position.x -= uTime * 0.7;
+    position.x -= uTime * 0.5;
     position.y += uTime * 0.2;
 
     elevation += cnoise3(vec3(
