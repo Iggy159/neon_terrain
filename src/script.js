@@ -46,7 +46,7 @@ window.addEventListener('resize', () =>
  * Camera
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 6
+camera.position.x = 10
 camera.position.y = 1
 camera.position.z = 0
 scene.add(camera)
@@ -58,13 +58,15 @@ controls.enableDamping = true
 //Terrain
 const land = {}
 
-land.geometry = new THREE.PlaneBufferGeometry(20, 20, 200, 200)
+land.geometry = new THREE.PlaneBufferGeometry(25, 25, 200, 200)
 land.geometry.rotateX(- Math.PI * 0.5)
 
 land.material = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     wireframe: true,
+    wireframeLinewidth: 1.5,
+    fog: true,
     uniforms: {
         uTime: { value: 0 }
     }
@@ -96,8 +98,8 @@ const bloomPass = new UnrealBloomPass(
 );
 bloomPass.exposure = 1.0
 bloomPass.threshold = 0.2;
-bloomPass.strength = 0.78; //intensity of glow
-bloomPass.radius = 2.0;
+bloomPass.strength = 0.6; //intensity of glow
+bloomPass.radius = 2;
 
 const composer = new EffectComposer(renderer);
 composer.setSize(window.innerWidth, window.innerHeight); 
@@ -111,6 +113,7 @@ composer.addPass( new RenderPass( scene, camera ) );
 
 composer.addPass(glitchPass);
 composer.addPass(bloomPass) 
+
 
 /**
  * Animate
