@@ -16,6 +16,23 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: 1;
+}
+
+.btn {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    margin-left: 10px;
+}
+
+button {
+    font-size: 30px;
+    background: none;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    color: rgb(42, 17, 48);
 }
 
 
