@@ -1,12 +1,6 @@
-const sound = ['wave']
-
-const playBtn = document.getElementById('buttonPlay')
-const pauseBtn = document.getElementById('buttonPause')
-
-playBtn.addEventListener('click', (e) => {
-    document.getElementById('sound').play()
-})
-
-pauseBtn.addEventListener('click', (e) => {
-    document.getElementById('sound').pause()
-})
+// function soundClick() {
+//     var audio = new Audio(); // Создаём новый элемент Audio
+//     audio.src = '/src/sounds/wave.mp3'; // Указываем путь к звуку "клика"
+//     audio.autoplay = true; // Автоматически запускаем
+//     audio.play()
+//   }
