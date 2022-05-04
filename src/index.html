@@ -10,15 +10,15 @@
 <body>
     <canvas class="webgl"></canvas>
     
-    <audio id="sound" src="sounds/wave.mp3" autoplay loop></audio>
+    <audio id="song" src="/src/sounds/wave.mp3" autoplay loop></audio>
     
-    <!--     
+        
     <div class="btn">
-        <button id="buttonPlay" class="play" ><i class="fa-solid fa-play"></i></button>
-        <button id="buttonPause" class="pause" onclick="soundClick()"><i class="fa-solid fa-pause"></i></button>
-    </div> -->
+        <button id="buttonPlay" class="play" onclick="soundPlay()"><i class="fa-solid fa-play"></i></button>
+        <button id="buttonPause" class="pause" onclick="soundPause()"><i class="fa-solid fa-pause"></i></button>
+    </div>
    
     
-    <!-- <script src="playBtn.js"></script> -->
+    <script src="sound.js"></script>
 </body>
 </html>

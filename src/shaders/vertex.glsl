@@ -1,26 +1,31 @@
-#pragma glslify: cnoise3 = require(glsl-noise/classic/3d)
+#pragma glslify: cnoise3 = require('glsl-noise/simplex/3d')
 
 varying float vElevation;
 uniform float uTime;
 uniform float uElevation;
+uniform float uElevationValleyFrequency;
+uniform float uElevationGeneral;
+uniform float uElevationGeneralFrequency;
 
 float getElevation(vec2 _position) {
 
     float elevation = 0.0;
 
     vec2 position = _position;
-    position.x -= uTime * 0.5;
-    position.y += uTime * 0.2;
+    position.x -= uTime * 1.2;
+    
+    float valleyStrength = cos((position.y * 3.1415) * 0.1) * 0.5;
+    elevation -= valleyStrength * 6.;
 
     elevation += cnoise3(vec3(
-        (position * 1.45) * .2,
+        (position * .65) * .2,
         0.0
-    )) * 2.3;
+    )) * 3.5;
 
     elevation += cnoise3(vec3(
-        (position * 15.0) * 0.3,
+        (position * 5.5) * 0.09,
         0.0
-    )) * 0.1;
+    )) * 0.45;
 
     elevation += uElevation;
 
