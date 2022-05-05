@@ -8,6 +8,7 @@ import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
+import mp3 from './sounds/wave.mp3'
 
 /**
  * Base
@@ -99,7 +100,7 @@ const bloomPass = new UnrealBloomPass(
 bloomPass.exposure = 1.0
 bloomPass.threshold = 0.2;
 bloomPass.strength = 0.5; //intensity of glow
-bloomPass.radius = 1.8;
+bloomPass.radius = 2;
 
 const composer = new EffectComposer(renderer);
 composer.setSize(window.innerWidth, window.innerHeight); 
@@ -114,6 +115,23 @@ composer.addPass( new RenderPass( scene, camera ) );
 composer.addPass(glitchPass);
 composer.addPass(bloomPass) 
 
+
+//Audio 
+const listener = new THREE.AudioListener();
+camera.add( listener );
+const sound = new THREE.Audio( listener );
+const audioLoader = new THREE.AudioLoader();
+
+const audioBtn = document.getElementById('buttonPlay')
+audioBtn.addEventListener('click', e => {
+    audioLoader.load( 'neon_terrain/src/sounds/wave.mp3', function( buffer ) {
+        sound.setBuffer( buffer );
+        sound.setLoop( true );
+        sound.setVolume( 0.5 );
+        sound.resume()
+        sound.play();
+    });
+})
 
 /**
  * Animate

@@ -85,6 +85,14 @@ module.exports = {
                     }
                 ]
             },
+            //audio
+            {
+                test: /\.(ogg|mp3|wav|mpe?g)$/i,
+                use: 'file-loader',
+                generator: {
+                    filename: './src/sounds/wave.mp3'
+                }
+            },
 
             // Shaders
             {

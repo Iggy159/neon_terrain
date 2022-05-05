@@ -23,9 +23,14 @@ float getElevation(vec2 _position) {
     )) * 3.5;
 
     elevation += cnoise3(vec3(
-        (position * 5.5) * 0.09,
+        (position * 7.0) * 0.09,
         0.0
-    )) * 0.45;
+    )) * 0.75;
+
+    elevation += cnoise3(vec3(
+        (position * 0.5) * 0.09,
+        0.0
+    )) * 5.75;
 
     elevation += uElevation;
 
