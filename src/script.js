@@ -8,7 +8,7 @@ import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
-import mp3 from './sounds/wave.mp3'
+
 
 /**
  * Base
@@ -59,7 +59,7 @@ controls.enableDamping = true
 //Terrain
 const land = {}
 
-land.geometry = new THREE.PlaneBufferGeometry(20, 20, 200, 200)
+land.geometry = new THREE.PlaneBufferGeometry(10, 10, 200, 200)
 land.geometry.rotateX(- Math.PI * 0.5)
 
 land.material = new THREE.ShaderMaterial({
@@ -124,7 +124,7 @@ const audioLoader = new THREE.AudioLoader();
 
 const audioBtn = document.getElementById('buttonPlay')
 audioBtn.addEventListener('click', e => {
-    audioLoader.load( 'neon_terrain/src/sounds/wave.mp3', function( buffer ) {
+    audioLoader.src( Wave, function( buffer ) {
         sound.setBuffer( buffer );
         sound.setLoop( true );
         sound.setVolume( 0.5 );
