@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@600&display=swap);
 *
 {
     margin: 0;
@@ -16,24 +17,25 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: 2;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    position: absolute;
+    width: 100%;
     z-index: 1;
 }
 
-.btn {
-    position: absolute;
-    top: 0;
-    z-index: 2;
-    margin-left: 10px;
+h1 {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 10rem;
+    text-align: center;
+    color: rgb(230, 230, 230);
 }
-
-button {
-    font-size: 30px;
-    background: none;
-    border: none;
-    margin: 10px;
-    cursor: pointer;
-    color: rgb(42, 17, 48);
-}
-
 
 /*# sourceMappingURL=main.css.map*/

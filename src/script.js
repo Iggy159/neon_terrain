@@ -59,14 +59,14 @@ controls.enableDamping = true
 //Terrain
 const land = {}
 
-land.geometry = new THREE.PlaneBufferGeometry(10, 10, 200, 200)
+land.geometry = new THREE.PlaneBufferGeometry(20, 20, 200, 200)
 land.geometry.rotateX(- Math.PI * 0.5)
 
 land.material = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     wireframe: true,
-    wireframeLinewidth: 0.5,
+    //wireframeLinewidth: 2.5,
     fog: true,
     uniforms: {
         uTime: { value: 0 }
@@ -114,24 +114,6 @@ composer.addPass( new RenderPass( scene, camera ) );
 
 composer.addPass(glitchPass);
 composer.addPass(bloomPass) 
-
-
-//Audio 
-const listener = new THREE.AudioListener();
-camera.add( listener );
-const sound = new THREE.Audio( listener );
-const audioLoader = new THREE.AudioLoader();
-
-const audioBtn = document.getElementById('buttonPlay')
-audioBtn.addEventListener('click', e => {
-    audioLoader.src( Wave, function( buffer ) {
-        sound.setBuffer( buffer );
-        sound.setLoop( true );
-        sound.setVolume( 0.5 );
-        sound.resume()
-        sound.play();
-    });
-})
 
 /**
  * Animate
