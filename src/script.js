@@ -1,10 +1,13 @@
 import './style.css'
 import * as THREE from 'three'
+import { ShaderPass } from "./../node_modules/three/examples/jsm/postprocessing/ShaderPass";
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { EffectComposer } from "/node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "/node_modules/three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "/node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+import { RGBShiftShader } from "./../node_modules/three/examples/jsm/shaders/RGBShiftShader";
 
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
@@ -46,8 +49,8 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 10
+const camera = new THREE.PerspectiveCamera(100, sizes.width / sizes.height, 0.1, 100)
+camera.position.x = 6
 camera.position.y = 0
 camera.position.z = 0
 scene.add(camera)
@@ -66,7 +69,7 @@ land.material = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     wireframe: true,
-    //wireframeLinewidth: 2.5,
+    wireframeLinewidth: 3.5,
     fog: true,
     uniforms: {
         uTime: { value: 0 }
@@ -99,13 +102,17 @@ const bloomPass = new UnrealBloomPass(
 );
 bloomPass.exposure = 1.0
 bloomPass.threshold = 0.2;
-bloomPass.strength = 0.5; //intensity of glow
-bloomPass.radius = 2;
+bloomPass.strength = 0.6; //intensity of glow
+bloomPass.radius = 3;
 
 const composer = new EffectComposer(renderer);
 composer.setSize(window.innerWidth, window.innerHeight); 
 composer.renderToScreen = true; 
 composer.addPass(renderScene); 
+
+//RGBShift
+const effect2 = new ShaderPass( RGBShiftShader );
+effect2.uniforms[ 'amount' ].value = 0.0025;
 
 //Glitch
 const glitchPass = new GlitchPass();
@@ -113,7 +120,8 @@ const glitchPass = new GlitchPass();
 composer.addPass( new RenderPass( scene, camera ) );
 
 composer.addPass(glitchPass);
-composer.addPass(bloomPass) 
+composer.addPass(bloomPass)
+composer.addPass( effect2 ); 
 
 /**
  * Animate
@@ -130,10 +138,10 @@ const tick = () =>
     land.material.uniforms.uTime.value = elapsedTime
     
     // Update controls
-    controls.update()
+    // controls.update()
 
     // Render
-    composer.render()
+    composer.render(scene, camera)
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)

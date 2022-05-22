@@ -12,13 +12,13 @@ float getElevation(vec2 _position) {
     float elevation = 0.0;
 
     vec2 position = _position;
-    position.x -= uTime * 1.2;
+    position.x -= uTime * 0.5;
     
     float valleyStrength = cos((position.y * 3.1415) * 0.1) * 0.39;
     elevation -= valleyStrength * 8.;
 
     elevation += cnoise3(vec3(
-        (position * .65) * .2,
+        (position * .75) * .2,
         0.0
     )) * 3.5;
 
