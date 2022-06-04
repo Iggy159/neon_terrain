@@ -102,8 +102,8 @@ const bloomPass = new UnrealBloomPass(
 );
 bloomPass.exposure = 1.0
 bloomPass.threshold = 0.2;
-bloomPass.strength = 0.6; //intensity of glow
-bloomPass.radius = 3;
+bloomPass.strength = 0.4; //intensity of glow
+bloomPass.radius = 2;
 
 const composer = new EffectComposer(renderer);
 composer.setSize(window.innerWidth, window.innerHeight); 
@@ -112,7 +112,7 @@ composer.addPass(renderScene);
 
 //RGBShift
 const effect2 = new ShaderPass( RGBShiftShader );
-effect2.uniforms[ 'amount' ].value = 0.0025;
+effect2.uniforms[ 'amount' ].value = 0.0015;
 
 //Glitch
 const glitchPass = new GlitchPass();
