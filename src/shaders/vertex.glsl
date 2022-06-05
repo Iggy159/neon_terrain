@@ -12,7 +12,7 @@ float getElevation(vec2 _position) {
     float elevation = 0.0;
 
     vec2 position = _position;
-    position.x -= uTime * 0.5;
+    position.x -= uTime * 1.5;
     
     float valleyStrength = cos((position.y * 3.1415) * 0.1) * 0.39;
     elevation -= valleyStrength * 8.;
